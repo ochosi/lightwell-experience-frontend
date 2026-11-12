@@ -15,6 +15,7 @@ import {
   type ProgressStepperProps,
   type SkeletonProps,
   type TitleProps,
+  type ToggleGroupProps,
   type ToolbarItemProps,
   type TooltipProps,
 } from '@patternfly/react-core';
@@ -200,6 +201,12 @@ export type LwButtonGroupPassthroughProps = Omit<HTMLAttributes<HTMLDivElement>,
 /** Defaults for `LwButtonGroup` — layout host; call-site wins via merge. */
 export type LwButtonGroupConfig = Partial<LwButtonGroupPassthroughProps>;
 
+/** PF `ToggleGroup` props forwarded by `LwToggleGroup` (kit builds items / passes children). */
+export type LwToggleGroupPassthroughProps = Omit<ToggleGroupProps, 'children'>;
+
+/** Defaults for `LwToggleGroup` — PF `ToggleGroup` host; call-site wins via merge. */
+export type LwToggleGroupConfig = Partial<LwToggleGroupPassthroughProps>;
+
 // ─── Assembly: LwMetricsStepper (PF ProgressStepper) ─────────────────────────
 
 /** PF `ProgressStepper` props forwarded by `LwMetricsStepper` (kit builds children; compact is refused). */
@@ -362,6 +369,7 @@ export interface LwComponentsConfig {
   pageHeader: LwPageHeaderConfig;
   pageHeaderHero: LwPageHeaderHeroConfig;
   buttonGroup: LwButtonGroupConfig;
+  toggleGroup: LwToggleGroupConfig;
   metricsStepper: LwMetricsStepperConfig;
   metricsCount: LwMetricsCountConfig;
   metricsCard: LwMetricsCardConfig;
@@ -450,6 +458,9 @@ export const componentsConfig: LwComponentsConfig = {
   },
   buttonGroup: {
     // Layout defaults live in button-group.css (gap / align).
+  },
+  toggleGroup: {
+    // PF-default pattern — no Lightwell baseline yet.
   },
   metricsStepper: {
     // PF ProgressStepper is vertical below md; React has no isHorizontal — kit applies pf-m-horizontal.
@@ -588,6 +599,10 @@ export function getLwPageHeaderHeroDefaults(): LwPageHeaderHeroConfig {
 
 export function getLwButtonGroupDefaults(): LwButtonGroupConfig {
   return { ...componentsConfig.buttonGroup };
+}
+
+export function getLwToggleGroupDefaults(): LwToggleGroupConfig {
+  return { ...componentsConfig.toggleGroup };
 }
 
 export function getLwMetricsStepperDefaults(): LwMetricsStepperConfig {
